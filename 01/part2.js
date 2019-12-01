@@ -1,5 +1,5 @@
 const fs = require('fs');
-const { getFuelRequired, getTotalFuelRequired } = require('../01');
+const { getFuelRequired } = require('./part1');
 
 const getCorrectedTotalMass = (mass) => {
   const fuelRequiredForFuel = getFuelRequired(mass);
