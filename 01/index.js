@@ -7,16 +7,18 @@ const fs = require('fs');
  */
 const getFuelRequired = mass => ((mass / 3) | 0) - 2;
 
-const getTotalFuelRequired = () => {
+const getTotalFuelRequired = (filePath) => {
   try {
-    const data = fs.readFileSync('./input.txt', 'utf8');
+    const data = fs.readFileSync(filePath || './input.txt', 'utf8');
     const masses = data.split('\n')
       .filter(line => line !== '')
       .map(m => Number(m));
-    return masses.reduce((total, mass) => total + getFuelRequired(mass), 0);
+    const totalFuel = masses
+      .reduce((total, mass) => total + getFuelRequired(mass), 0);
+    return totalFuel < 0 ? 0 : totalFuel;
   } catch (err) {
     console.error(err);
   }
 };
 
-console.log(getTotalFuelRequired());
+module.exports = { getFuelRequired, getTotalFuelRequired };
